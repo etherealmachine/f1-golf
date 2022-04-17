@@ -3,8 +3,8 @@
   import humanizeDuration from "humanize-duration";
   import Icon from "@iconify/svelte";
 
-  import type { GrandPrix, Prediction } from "./types";
-  import { RACES, DRIVERS } from "./data";
+  import type { GrandPrix, Prediction } from "./Types";
+  import { RACES, DRIVERS } from "./Data";
   import Predict from "./Predict.svelte";
   import ViewResults from "./ViewResults.svelte";
 
@@ -56,8 +56,6 @@
     },
     {}
   );
-
-  $: prediction = predictions[currentRace.name];
 </script>
 
 <main>
@@ -113,19 +111,6 @@
   h1 {
     color: #ff1801;
     text-transform: uppercase;
-    font-size: 34px;
-    font-weight: 500;
-    margin: 0;
-  }
-
-  h2 {
-    font-size: 24px;
-    font-weight: 1000;
-    margin: 0;
-  }
-
-  h3 {
-    margin: 0;
   }
 
   button.next {

@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-import type { GrandPrix, Driver } from "./types";
+import type { GrandPrix, Driver } from "./Types";
 
 export const TEAMS: string[] = [
   "Ferrari",

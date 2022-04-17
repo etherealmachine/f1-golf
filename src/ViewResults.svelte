@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Prediction } from "./types";
+  import type { Prediction } from "./Types";
 
   export let results: string[];
   export let prediction: Prediction[];
@@ -28,10 +28,6 @@
       0
     );
   }
-
-  function formatScore(score) {
-    return `${Math.round(100 * (score / 400))}%`;
-  }
 </script>
 
 <main>
@@ -53,7 +49,10 @@
     {/each}
   </table>
   <h4>
-    Total: {formatScore(score(prediction, results))}
+    {score(prediction, results)} / 400
+  </h4>
+  <h4>
+    {Math.round(100 * (score(prediction, results) / 400))}%
   </h4>
 </main>
 
