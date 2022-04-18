@@ -16,6 +16,7 @@
   attachDebug();
 
   let currentRace: GrandPrix = RACES[0];
+  $: currentRaceIndex = RACES.indexOf(currentRace);
   let currentTime: DateTime = DateTime.now();
 
   $: currentDelta = currentRace.time.diff(currentTime).valueOf();
@@ -36,19 +37,11 @@
   }, 1000);
 
   function previousRace() {
-    const i = RACES.indexOf(currentRace);
-    if (i === 0) {
-      return;
-    }
-    currentRace = RACES[i - 1];
+    currentRace = RACES[currentRaceIndex - 1];
   }
 
   function nextRace() {
-    const i = RACES.indexOf(currentRace);
-    if (i + 1 >= RACES.length) {
-      return;
-    }
-    currentRace = RACES[i + 1];
+    currentRace = RACES[currentRaceIndex + 1];
   }
 
   function spoil(race: string) {
@@ -78,13 +71,23 @@
   <div
     style="display: flex; justify-content: space-between; align-items: center;"
   >
-    <button on:click={previousRace} class="next" aria-label="previous">
+    <button
+      on:click={previousRace}
+      class="next"
+      class:hidden={currentRaceIndex <= 0}
+      aria-label="previous"
+    >
       <Icon icon="fa6-solid:arrow-left-long" />
     </button>
     <h1>
       {currentRace.name}
     </h1>
-    <button on:click={nextRace} class="next" aria-label="next">
+    <button
+      on:click={nextRace}
+      class="next"
+      class:hidden={currentRaceIndex >= RACES.length - 1}
+      aria-label="next"
+    >
       <Icon icon="fa6-solid:arrow-right-long" />
     </button>
   </div>
@@ -165,6 +168,10 @@
     background-color: #ff1801;
     border-radius: 12px;
     padding: 16px 24px;
+  }
+
+  button.hidden {
+    display: none;
   }
 
   @media (min-width: 640px) {
