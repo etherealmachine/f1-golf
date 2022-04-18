@@ -127,8 +127,8 @@ export const RACES: GrandPrix[] = [
     time: DateTime.fromISO("2022-04-09T22:00:00-07:00"),
   },
   {
-    name: "ITALIAN GRAND PRIX",
+    name: "EMILIA ROMANGNA GRAND PRIX",
     location: "Imola, Italy",
-    time: DateTime.fromISO("2022-04-22T06:00:00-07:00"),
+    time: DateTime.fromISO("2022-04-24T06:00:00-07:00"),
   },
 ];
