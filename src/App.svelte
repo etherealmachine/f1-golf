@@ -116,7 +116,8 @@
     })}
   </h2>
   <h3>{currentDeltaString}</h3>
-  <div style="display: flex;">
+  <hr />
+  <div style="display: flex; flex: 1; margin-bottom: 8px;">
     {#if currentDelta > 0}
       <Predict {prediction} on:change={predictionChanged} />
     {:else if currentRace.results && $state.spoiled[currentRace.name] && prediction}
@@ -133,10 +134,11 @@
 
 <style>
   main {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     text-align: center;
     margin: 0 auto;
     padding: 0 12px;
