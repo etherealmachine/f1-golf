@@ -66,20 +66,6 @@
   function predictionChanged(event: CustomEvent) {
     $state.predictions[currentRace.name] = event.detail;
   }
-
-  let social: HTMLElement;
-  function screenshot() {
-    social.style.display = "none";
-    html2canvas(document.body).then((canvas) => {
-      const base64img = canvas.toDataURL("image/png");
-      const type = "text/plain";
-      const blob = new Blob([base64img], { type });
-      const data = [new ClipboardItem({ [type]: blob })];
-      navigator.clipboard.write(data);
-      social.style.display = "block";
-    });
-    window.location.href = "instagram://story-camera";
-  }
 </script>
 
 <main>
@@ -151,11 +137,6 @@
       </div>
     {/if}
   </div>
-  {#if /Mobi|Android/i.test(navigator.userAgent)}
-    <div bind:this={social} on:click={screenshot} class="social">
-      <Icon icon="mdi:instagram" />
-    </div>
-  {/if}
 </main>
 
 <style>
@@ -192,16 +173,6 @@
 
   button.hidden {
     display: none;
-  }
-
-  .social {
-    font-size: 24px;
-    line-height: 24px;
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    bottom: 12px;
-    right: 12px;
   }
 
   @media (min-width: 640px) {
