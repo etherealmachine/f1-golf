@@ -71,22 +71,26 @@ button:focus {
 }
 
 h1 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   margin: 0;
 }
 
 h2 {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   margin: 0;
 }
 
 h3 {
+  font-size: 14px;
+  font-weight: 600;
   margin: 0;
 }
 
 h4 {
+  font-size: 14px;
+  font-weight: 500;
   margin: 0;
 }
 

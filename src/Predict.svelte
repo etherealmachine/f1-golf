@@ -56,7 +56,7 @@
     display: flex;
     align-items: center;
     flex: 1;
-    border: 1px solid black;
+    outline: 1px solid black;
     background: white;
     padding: 0 16px;
   }

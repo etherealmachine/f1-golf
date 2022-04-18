@@ -156,8 +156,8 @@
   }
 
   button.next {
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 22px;
+    line-height: 22px;
     background: transparent;
     border: none;
   }
