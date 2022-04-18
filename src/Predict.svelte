@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
   import SortableList from "./SortableList.svelte";
-  import type { Prediction } from "./types";
+  import type { Prediction } from "./Types";
 
   export let prediction: Prediction[];
 
@@ -9,7 +12,7 @@
   }
 
   function predictionChanged(event: CustomEvent) {
-    //predictions[currentRace.name] = event.detail;
+    dispatch("change", event.detail);
   }
 </script>
 

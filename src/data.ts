@@ -113,7 +113,7 @@ export const RACES: GrandPrix[] = [
       "Valtteri Bottas",
       "Pierre Gasly",
       "Alex Albon",
-      "Zhou Guanyu",
+      "Guanyu Zhou",
       "Lance Stroll",
       "Mick Schumacher",
       "Kevin Magnussen",
