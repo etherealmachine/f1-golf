@@ -40,13 +40,11 @@
   main {
     display: flex;
     flex-direction: column;
-    flex: 1;
   }
 
   :global(.driver-list) {
     display: flex;
     flex-direction: column;
-    flex: 1;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -55,7 +53,6 @@
   :global(.driver-slot) {
     display: flex;
     align-items: center;
-    flex: 1;
     outline: 1px solid black;
     background: white;
     padding: 0 16px;
@@ -64,7 +61,6 @@
   .driver-item {
     font-size: 100%;
     display: flex;
-    flex: 1;
     align-items: center;
     justify-content: space-between;
   }
