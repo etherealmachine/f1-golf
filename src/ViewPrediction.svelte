@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let results: string[];
+  import type { Prediction } from "./Types";
+
+  export let prediction: Prediction[];
 
   function formatName(name: string) {
     return name.split(" ")[1];
@@ -7,16 +9,18 @@
 </script>
 
 <main>
-  <h3>Results</h3>
+  <h3 style="margin-bottom: 8px; text-decoration: underline;">
+    Your Prediction
+  </h3>
   <table>
     <tr>
       <th>Position</th>
       <th>Driver</th>
     </tr>
-    {#each results as driver, index}
+    {#each prediction as p, index}
       <tr>
         <td>{index + 1}</td>
-        <td>{formatName(driver)}</td>
+        <td>{formatName(p.driver.name)}</td>
       </tr>
     {/each}
   </table>

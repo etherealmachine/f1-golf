@@ -9,6 +9,11 @@
   import ViewResults from "./ViewResults.svelte";
   import { state } from "./Store";
   import ViewScore from "./ViewScore.svelte";
+  import { shuffle } from "./lib";
+
+  import { attachDebug } from "./Debug";
+  import ViewPrediction from "./ViewPrediction.svelte";
+  attachDebug();
 
   let currentRace: GrandPrix = RACES[0];
   let currentTime: DateTime = DateTime.now();
@@ -50,26 +55,6 @@
     $state.spoiled[race] = true;
   }
 
-  function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
-    }
-
-    return array;
-  }
-
   $: if (
     $state.predictions[currentRace.name] === undefined &&
     currentDelta > 0
@@ -83,8 +68,6 @@
       })
     );
   }
-
-  $: prediction = $state.predictions[currentRace.name];
 
   function predictionChanged(event: CustomEvent) {
     $state.predictions[currentRace.name] = event.detail;
@@ -119,15 +102,35 @@
   <hr />
   <div style="display: flex; flex: 1; margin-bottom: 8px;">
     {#if currentDelta > 0}
-      <Predict {prediction} on:change={predictionChanged} />
-    {:else if currentRace.results && $state.spoiled[currentRace.name] && prediction}
-      <ViewScore results={currentRace.results} {prediction} />
-    {:else if currentRace.results && $state.spoiled[currentRace.name] && !prediction}
-      <ViewResults results={currentRace.results} />
-    {:else if currentRace.results && !$state.spoiled[currentRace.name]}
-      <button on:click={() => spoil(currentRace.name)}>View Results</button>
+      <Predict
+        prediction={$state.predictions[currentRace.name]}
+        on:change={predictionChanged}
+      />
+    {:else if currentRace.results}
+      <div style="flex: 1;">
+        {#if $state.predictions[currentRace.name] && !$state.spoiled[currentRace.name]}
+          <ViewPrediction prediction={$state.predictions[currentRace.name]} />
+        {:else if $state.predictions[currentRace.name] && $state.spoiled[currentRace.name]}
+          <ViewScore
+            results={currentRace.results}
+            prediction={$state.predictions[currentRace.name]}
+          />
+        {:else if $state.spoiled[currentRace.name]}
+          <ViewResults results={currentRace.results} />
+        {/if}
+        {#if !$state.spoiled[currentRace.name]}
+          <button
+            class="start"
+            style="margin-top: 8px;"
+            on:click={() => spoil(currentRace.name)}>View Results</button
+          >
+        {/if}
+      </div>
     {:else}
-      <div>Waiting for results...</div>
+      <div style="margin-top: 24px;">
+        <ViewPrediction prediction={$state.predictions[currentRace.name]} />
+        <div>Waiting for results...</div>
+      </div>
     {/if}
   </div>
 </main>
@@ -154,6 +157,14 @@
     line-height: 36px;
     background: transparent;
     border: none;
+  }
+
+  button.start {
+    color: white;
+    font-weight: 900;
+    background-color: #ff1801;
+    border-radius: 12px;
+    padding: 16px 24px;
   }
 
   @media (min-width: 640px) {
